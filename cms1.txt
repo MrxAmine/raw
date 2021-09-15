@@ -1,0 +1,121 @@
+import requests
+import urllib3
+from multiprocessing.dummy import Pool as ThreadPool
+import colorama
+import os
+import random
+import requests
+import sys
+import time
+import ctypes
+from multiprocessing.dummy import Pool as ThreadPool
+from colorama import *
+colorama.init()
+urllib3.disable_warnings()
+
+
+# Now regular ANSI codes should work, even in Windows
+CLEAR_SCREEN = "\033[2J"
+RED = "\033[31m"   # mode 31 = red forground
+RESET = "\033[0m"  # mode 0  = reset
+BLUE  = "\033[34m"
+YELLOW = "\033[1;33m"
+CYAN  = "\033[36m"
+GREEN = "\033[32m"
+RESET = "\033[0m"
+BOLD    = "\033[m"
+REVERSE = "\033[m"
+WHITE = "\033[1;37m"
+
+os.system('cls' if os.name == 'nt' else 'clear')
+
+def print_logo():
+    clear = "\x1b[0m"
+
+    print(GREEN + """
+
+
+ ██████╗███╗   ███╗███████╗    ██████╗ ███████╗████████╗███████╗ ██████╗████████╗ ██████╗ ██████╗ 
+██╔════╝████╗ ████║██╔════╝    ██╔══██╗██╔════╝╚══██╔══╝██╔════╝██╔════╝╚══██╔══╝██╔═══██╗██╔══██╗
+██║     ██╔████╔██║███████╗    ██║  ██║█████╗     ██║   █████╗  ██║        ██║   ██║   ██║██████╔╝
+██║     ██║╚██╔╝██║╚════██║    ██║  ██║██╔══╝     ██║   ██╔══╝  ██║        ██║   ██║   ██║██╔══██╗
+╚██████╗██║ ╚═╝ ██║███████║    ██████╔╝███████╗   ██║   ███████╗╚██████╗   ██║   ╚██████╔╝██║  ██║
+ ╚═════╝╚═╝     ╚═╝╚══════╝    ╚═════╝ ╚══════╝   ╚═╝   ╚══════╝ ╚═════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝
+                                                                                                  
+                                                                                         
+                                     
+""")
+
+print_logo()
+
+if not os.path.exists("Cms"):
+    os.mkdir("Cms")
+
+
+
+header = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
+
+
+def lightxcms(site):
+    site = site.replace('\n', '').replace('\r', '')
+    if site.startswith('https://'):
+        site = site.replace('https://', 'http://')
+    elif site.startswith('http://'):
+        pass
+    else:
+        site = 'http://'+site
+    try:
+        payload = requests.get(site, headers=header, verify=False, timeout=20, allow_redirects=True)
+        if payload.status_code==200:
+            if 'content="PrestaShop"' in payload.text:
+                print(GREEN + "[+] PRESTASHOP :: "+site)
+                open('Preatshop.txt','a').write(site+'\n')
+                pass
+            elif 'catalog/view/' in payload.text:
+                print(GREEN + "[+] OpenCart :: "+site)
+                open('OpenCart.txt','a').write(site+'\n')
+                pass
+            elif 'meta name="generator" content="vBulletin' in payload.text:
+                print(GREEN + "[+] vBulletin :: "+site)
+                open('vBulletin.txt','a').write(site+'\n')
+                pass
+            elif '/sites/default/' in payload.text:
+                print(GREEN + "[+] Drupal :: "+site)
+                open('Drupal.txt','a').write(site+'\n')
+                pass
+            elif 'laravel_session' in payload.text:
+                print(GREEN + "[+] Laravel :: "+site)
+                open('Laravel.txt','a').write(site+'\n')
+                pass
+            else:
+                for dirx in ['/media/system/js/core.js', '/wp-includes/js/jquery/jquery.js']:
+                    payload2 = requests.get(site+dirx, headers=header, verify=False, timeout=20, allow_redirects=True)
+                    if 'jQuery' in payload2.text:
+                        print(GREEN + "[+] Wordpress :: "+site)
+                        open('Wordpress.txt','a').write(site+'\n')
+                        break
+                    elif 'window.Joomla' in payload2.text:
+                        print(GREEN + "[+] Joomla :: "+site)
+                        open('Joomla.txt','a').write(site+'\n')
+                        break
+                    else:
+                        print(RED + "[+] UNKNOWN :: "+site)
+                        open('Unknown.txt','a').write(site+'\n')
+        else:
+            print(RED + "[+] UNKNOWN :: "+site)
+            open('Unknown.txt','a').write(site+'\n')
+    except:
+        print(RED + "[+] DEAD SITE :: "+site)
+
+
+ctypes.windll.kernel32.SetConsoleTitleW(" [+] Mass CMS Detector V1 By AmineMrx")
+
+
+def multixcms():
+    sitex = open(input(RED + 'Website List > ' + WHITE), 'r').readlines()
+    td = input("THREADS : ")  
+    pool = ThreadPool(int(td))
+    pool.map(lightxcms, sitex)
+    pool.close()
+    pool.join()
+multixcms()
