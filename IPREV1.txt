@@ -68,37 +68,6 @@ os.system("title " + "[+] Unlimited Reverse Ip  - AmineMrx")
 ###  DOMAIN TOO IPP ######################3
 
 
-def Auth():
-    print()
-    print()
-    PASS = getpass("  Password > ")
-    os.system('cls')
-    print("Wait !!")
-    time.sleep(1)
-    os.system('cls')
-    b = requests.get('https://raw.githubusercontent.com/MrxAmine/raw/main/PASS.txt').text
-    if PASS in b:
-        print()
-        print()
-        print("Login Successful")
-        print()
-        update = requests.get('https://raw.githubusercontent.com/MrxAmine/raw/main/work.txt')
-        print(fg+update.text)
-        time.sleep(2)
-        pass
-    else:
-        os.system('cls')
-        print(Fore.RED + '\n -- ' + Fore.WHITE + Style.BRIGHT + 'Login Was Unsuccessful')
-        print()
-        print()
-        print("Press Enter To Retry ! ")
-        input()
-        os.system('cls')
-        Auth()
-        os.system('cls')
-
-########### AUTH ############""
-Auth()
 os.system('cls')
 
 
