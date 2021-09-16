@@ -5,20 +5,7 @@ import sys
 import threading
 import requests, urllib3
 from datetime import datetime
-from colorama import Fore
-from colorama import Style
-from colorama import init
-import colorama
-init(autoreset=True)
-fr = Fore.RED
-gr = Fore.BLUE
-fc = Fore.CYAN
-fw = Fore.WHITE
-fy = Fore.YELLOW
-fg = Fore.GREEN
-sd = Style.DIM
-sn = Style.NORMAL
-sb = Style.BRIGHT
+
 class Cl:
 	end	= '\033[0m'
 	red	= '\033[1;31m'
@@ -62,7 +49,7 @@ def check_shell(url):
 		s_500.close()
 		exit(0)
 	except Exception as e:
-		print(fr+"[!] [Error] {}".format(e))
+		print("[!][Error] {}".format(e))
 			
 	return True
 	
@@ -71,15 +58,7 @@ def main():
 	global s_200, s_403, s_500
 	
 	urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
-	print(fr+"""
-███████╗██╗  ██╗███████╗██╗     ██╗          ██████╗██╗  ██╗███████╗ ██████╗██╗  ██╗███████╗██████╗ 
-██╔════╝██║  ██║██╔════╝██║     ██║         ██╔════╝██║  ██║██╔════╝██╔════╝██║ ██╔╝██╔════╝██╔══██╗
-███████╗███████║█████╗  ██║     ██║         ██║     ███████║█████╗  ██║     █████╔╝ █████╗  ██████╔╝
-╚════██║██╔══██║██╔══╝  ██║     ██║         ██║     ██╔══██║██╔══╝  ██║     ██╔═██╗ ██╔══╝  ██╔══██╗
-███████║██║  ██║███████╗███████╗███████╗    ╚██████╗██║  ██║███████╗╚██████╗██║  ██╗███████╗██║  ██║
-╚══════╝╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝     ╚═════╝╚═╝  ╚═╝╚══════╝ ╚═════╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝
-                                                                                                    
-		""")
+	
 	s_200	= open("live.txt", "w")
 	s_403	= open("forbidden.txt", "w")
 	s_500	= open("server_error.txt", "w")
@@ -90,12 +69,11 @@ def main():
 	}
 	
 	try :
-		target	= open(input('Shell List ( Without Http:// ) > : '), 'r',
-	             errors='ignore').read().splitlines()
+		target	= [i for i in open(sys.argv[1]).read().split("\n") if i != ""]
 	except IOError:
 		print("[!][Error] No such file or directory: '{}'".format(sys.argv[1]))
 	except:
-		print("[+] Tool By Amine Mrx")
+		print("[+] Usage: python file.py list.txt")
 		exit(0)	
 	
 	for i in target:
