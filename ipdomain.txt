@@ -175,8 +175,6 @@ class Ch1ecker:
 tool = """
  [1] Ip To Domain 
  [2] Domain To Ip
-      
- [9] Menu
 """
 
 
@@ -194,14 +192,14 @@ if main == "1":
   print(logo2)
   start = Checker()
   start.run_thread()
-if main == "2":
+elif main == "2":
   print(logo1)
   start = Ch1ecker()
   start.run1_thread()
 
 
-if main == "9":
-  quit()
+else:
+    quit()
 
 
 
