@@ -76,7 +76,7 @@ class Checker:
 
       else:
         print(f"\033[34m[\033[37m{num}\033[34m|\033[37m{self.length}\033[34m] \033[32m{target}  \033[32m[Valid] ===> https://{result}\033[0m")
-        kl = open("Result\IP-2-DOMAIN\Domains.txt", "a+")
+        kl = open("Bot-Result/[4] IP - Domain/IP-2-DOMAIN/Domains.txt", "a+")
         kl.write(result+"\n")
         kl.close()
 
@@ -146,7 +146,7 @@ class Ch1ecker:
 
       else:
         print(f"\033[34m[\033[37m{num}\033[34m|\033[37m{self.length}\033[34m] \033[32m{target}  \033[32m[Valid] ===> {result}\033[0m")
-        kl = open("Result/DOMAIN-2-IP/IPs.txt", "a+")
+        kl = open("Bot-Result/[4] IP - Domain/DOMAIN-2-IP/IPs.txt", "a+")
         kl.write(result+"\n")
         kl.close()
 
