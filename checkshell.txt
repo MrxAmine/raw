@@ -60,9 +60,9 @@ def main():
 	
 	urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 	
-	s_200	= open("live.txt", "w")
-	s_403	= open("forbidden.txt", "w")
-	s_500	= open("server_error.txt", "w")
+	s_200	= open("Bot-Result/[2] Shell Checker/live.txt", "w")
+	s_403	= open("Bot-Result/[2] Shell Checker/forbidden.txt", "w")
+	s_500	= open("Bot-Result/[2] Shell Checker/server_error.txt", "w")
 	session	= requests.Session()
 	head	= { 
 		"User-Agent" : "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:67.0) Gecko/20100101 Firefox/67.0",
