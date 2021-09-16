@@ -206,10 +206,10 @@ os.system('cls')
 ########### AUTH ############""
 
 tool = """
-      [1] Ip To Domain 
-      [2] Domain To Ip
+ [1] Ip To Domain 
+ [2] Domain To Ip
       
-      [9] Exit Tool :) 
+ [9] Menu
 """
 
 
