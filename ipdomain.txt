@@ -1,4 +1,3 @@
-
 import socket,os,sys,threading,queue,time,random,ctypes,requests,webbrowser
 from datetime import date
 from colorama import Fore
@@ -20,7 +19,7 @@ sb = Style.BRIGHT
 d = []
 date = date.today()
 dl = date.strftime("%d-%m-%Y")
-title = "Tool By @AmineMrx".format(dl)
+title = "[+] DOMAIN ↔ IP By @AmineMrx".format(dl)
 
 os.system('echo -n -e "\033]0;{}\007"'.format(title))
 os.system('cls')
@@ -200,6 +199,3 @@ elif main == "2":
 
 else:
     quit()
-
-
-
