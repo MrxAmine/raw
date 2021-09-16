@@ -69,7 +69,8 @@ def main():
 	}
 	
 	try :
-		target	= [i for i in open(sys.argv[1]).read().split("\n") if i != ""]
+		target	= open(input('Shell List ( Without Http:// ) > : '), 'r',
+	             errors='ignore').read().splitlines()
 	except IOError:
 		print("[!][Error] No such file or directory: '{}'".format(sys.argv[1]))
 	except:
