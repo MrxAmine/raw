@@ -3,6 +3,7 @@
 from __future__ import print_function
 import sys
 import threading
+import os
 import requests, urllib3
 from datetime import datetime
 
@@ -69,6 +70,7 @@ def main():
 	}
 	
 	try :
+		os.system('cls')
 		target	= open(input('Shell List ( Without Http:// ) > : '), 'r',
 	             errors='ignore').read().splitlines()
 	except IOError:
