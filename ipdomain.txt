@@ -1,0 +1,240 @@
+
+import socket,os,sys,threading,queue,time,random,ctypes,requests,webbrowser
+from datetime import date
+from colorama import Fore
+from colorama import Style
+from colorama import init
+from getpass import getpass
+from colorama import Fore, init, Style
+
+init(autoreset=True)
+fr = Fore.RED
+gr = Fore.BLUE
+fc = Fore.CYAN
+fw = Fore.WHITE
+fy = Fore.YELLOW
+fg = Fore.GREEN
+sd = Style.DIM
+sn = Style.NORMAL
+sb = Style.BRIGHT
+d = []
+date = date.today()
+dl = date.strftime("%d-%m-%Y")
+title = "Tool By @AmineMrx".format(dl)
+
+os.system('echo -n -e "\033]0;{}\007"'.format(title))
+os.system('cls')
+
+num = 0
+#### IP TOOOO DOMAIN ######""
+logo2 ="""
+██ ██████      ██████      ██████   ██████  ███    ███  █████  ██ ███    ██ 
+██ ██   ██          ██     ██   ██ ██    ██ ████  ████ ██   ██ ██ ████   ██ 
+██ ██████       █████      ██   ██ ██    ██ ██ ████ ██ ███████ ██ ██ ██  ██ 
+██ ██          ██          ██   ██ ██    ██ ██  ██  ██ ██   ██ ██ ██  ██ ██ 
+██ ██          ███████     ██████   ██████  ██      ██ ██   ██ ██ ██   ████ 
+                                                                            
+                                                                            
+"""
+
+
+class Checker:
+  inputQueue = queue.Queue()
+
+  def __init__(self):
+    print(fr+"[IP 2 DOMAIN] Selected")
+    self.domains = input("\033[34;1m[IP-2-DOMAIN] \033[32;1mIPs:\033[0m\033[37;1m ")
+    self.threads = input("\033[34;1m[IP-2-DOMAIN] \033[32;1mHow many threads?:\033[0m\033[37;1m ") 
+    self.length = len(list(open(self.domains)))
+    print('')
+
+  def save_to_fie(self, sent, lead):
+      kl = open(sent, "a+")
+      kl.write(lead)
+      kl.close()
+
+  def send(self,target):
+    ip = target
+    try:
+      s = socket.gethostbyaddr(ip)[0]
+      return s
+    except socket.herror:
+      #pass
+      return 'dead'
+    except socket.gaierror:
+      #pass
+      return 'dead'
+  
+  def check(self):
+    global num
+    global l
+    while 1:
+      target = self.inputQueue.get()
+      num += 1
+      result = self.send(target)
+      if result == "dead":
+        print(f"\033[34m[\033[37m{num}\033[34m|\033[37m{self.length}\033[34m] \033[31m{target} \033[31m[Not Valid]\033[0m")
+
+      else:
+        print(f"\033[34m[\033[37m{num}\033[34m|\033[37m{self.length}\033[34m] \033[32m{target}  \033[32m[Valid] ===> https://{result}\033[0m")
+        kl = open("Result\IP-2-DOMAIN\Domains.txt", "a+")
+        kl.write(result+"\n")
+        kl.close()
+
+  def run_thread(self):
+    while True:
+      for x in range(int(self.threads)):
+        t = threading.Thread(target=self.check)
+        t.setDaemon(True)
+        t.start()
+      for y in open(self.domains, 'r').readlines():
+        self.inputQueue.put(y.strip())
+      self.inputQueue.join()
+
+
+      ### ip TO DOMAIN ########
+
+
+
+
+logo1 = """
+██████   ██████  ███    ███  █████  ██ ███    ██     ██████      ██ ██████  
+██   ██ ██    ██ ████  ████ ██   ██ ██ ████   ██          ██     ██ ██   ██ 
+██   ██ ██    ██ ██ ████ ██ ███████ ██ ██ ██  ██      █████      ██ ██████  
+██   ██ ██    ██ ██  ██  ██ ██   ██ ██ ██  ██ ██     ██          ██ ██      
+██████   ██████  ██      ██ ██   ██ ██ ██   ████     ███████     ██ ██      
+                                                                            
+                                                                            
+"""
+
+
+class Ch1ecker:
+  inputQueue = queue.Queue()
+
+  def __init__(self):
+    print(fr+"[DOMAIN 2 IP] Selected")
+    self.urls = input(fc+"URLs >>  ")
+    self.threads = input("\033[34;1m[DOMAIN-2-IP] \033[32;1mHow many threads?:\033[0m\033[37;1m ") 
+    self.length = len(list(open(self.urls)))
+    print('')
+
+  def save_to_fie(self, sent, lead):
+      kl = open(sent, "a+")
+      kl.write(lead)
+      kl.close()
+
+  def send(self,target):
+    ip = target
+    try:
+      s = socket.gethostbyname(ip)
+      return s
+    except socket.herror:
+      #pass
+      return 'dead'
+    except socket.gaierror:
+      #pass
+      return 'dead'
+  
+  def check(self):
+    global num
+    global l
+    while 1:
+      target = self.inputQueue.get()
+      num += 1
+      result = self.send(target)
+      if result == "dead":
+        print(f"\033[34m[\033[37m{num}\033[34m|\033[37m{self.length}\033[34m] \033[31m{target} \033[31m[Not Valid]\033[0m")
+
+      else:
+        print(f"\033[34m[\033[37m{num}\033[34m|\033[37m{self.length}\033[34m] \033[32m{target}  \033[32m[Valid] ===> {result}\033[0m")
+        kl = open("Result/DOMAIN-2-IP/IPs.txt", "a+")
+        kl.write(result+"\n")
+        kl.close()
+
+  def run1_thread(self):
+    while True:
+      for x in range(int(self.threads)):
+        t = threading.Thread(target=self.check)
+        t.setDaemon(True)
+        t.start()
+      for y in open(self.urls, 'r').readlines():
+        self.inputQueue.put(y.strip())
+      self.inputQueue.join()
+
+
+
+
+        
+        
+        
+        
+###  DOMAIN TOO IPP ######################3
+
+
+def Auth():
+    print()
+    print()
+    PASS = getpass("  Password > ")
+    os.system('cls')
+    print("Wait !!")
+    time.sleep(1)
+    os.system('cls')
+    b = requests.get('https://raw.githubusercontent.com/MrxAmine/raw/main/PASS.txt').text
+    if PASS in b:
+        print()
+        print()
+        print("Login Successful")
+        print()
+        update = requests.get('https://raw.githubusercontent.com/MrxAmine/raw/main/work.txt')
+        print(fg+update.text)
+        time.sleep(2)
+        pass
+    else:
+        os.system('cls')
+        print(Fore.RED + '\n -- ' + Fore.WHITE + Style.BRIGHT + 'Login Was Unsuccessful')
+        print()
+        print()
+        print("Press Enter To Retry ! ")
+        input()
+        os.system('cls')
+        Auth()
+        os.system('cls')
+
+########### AUTH ############""
+Auth()
+os.system('cls')
+########### AUTH ############""
+
+tool = """
+      [1] Ip To Domain 
+      [2] Domain To Ip
+      
+      [9] Exit Tool :) 
+"""
+
+
+print(tool)
+print()
+print()
+response = requests.get('https://raw.githubusercontent.com/MrxAmine/raw/main/IP-V1.txt')
+print(fg+response.text)
+main = input("Choose Tool >>  ")
+os.system('cls')
+
+
+
+if main == "1":
+  print(logo2)
+  start = Checker()
+  start.run_thread()
+if main == "2":
+  print(logo1)
+  start = Ch1ecker()
+  start.run1_thread()
+
+
+if main == "9":
+  quit()
+
+
+
