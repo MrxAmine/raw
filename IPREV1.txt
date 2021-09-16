@@ -76,7 +76,7 @@ class Reverse_Ip:
    def __init__(self):
       self.url = 'https://reverseip-tools.com/api?q='
       self.banner()
-      self.save = 'result.txt'
+      self.save = 'Bot-Result/result.txt'
    def reverse(self, domain):
         try:
             req = requests.get(self.url+domain)
@@ -139,7 +139,7 @@ class Reverse_Ip:
            exit(red+"File Not Found!\n")
       print (red+'\nI suggest using no more than (20) threads \nor the tools will crash!')
       thread = int(self.input(yellow+'Thread -> '+green))
-      print(fr+'\nResult will be saved in: result.txt')
+      print(fr+'\nResult will be saved in: Bot-Result/result.txt')
       for dom in list:
          if dom:
              jobs.put(dom)
