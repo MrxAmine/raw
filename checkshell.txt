@@ -71,7 +71,7 @@ def main():
 	
 	try :
 		os.system('cls')
-		target	= open(input('Shell List ( Without Http:// ) > : '), 'r',
+		target	= open(input('Shell List >> : '), 'r',
 	             errors='ignore').read().splitlines()
 	except IOError:
 		print("[!][Error] No such file or directory: '{}'".format(sys.argv[1]))
