@@ -76,7 +76,7 @@ class Reverse_Ip:
    def __init__(self):
       self.url = 'https://reverseip-tools.com/api?q='
       self.banner()
-      self.save = 'Bot-Result/result.txt'
+      self.save = 'Bot-Result\[3] IP Reverse Unlimited #1/result.txt'
    def reverse(self, domain):
         try:
             req = requests.get(self.url+domain)
