@@ -1,3 +1,4 @@
 from tkinter import messagebox
 
 messagebox.showerror("Bot V1", "New Update Available , Contact AmineMrx")
+quit()
